@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Static site: every page is prerendered by `vite build` into dist/client,
+  // so the Worker only serves assets. No server code runs.
+  "name": "sohel-pro",
+  "compatibility_date": "2026-10-07",
+  "assets": {
+    "directory": "./dist/client",
+    // Canonical URLs have no trailing slash: /about serves about/index.html
+    // and /about/ redirects to /about.
+    "html_handling": "drop-trailing-slash",
+    // Unknown URLs get dist/client/404.html with a 404 status.
+    "not_found_handling": "404-page"
+  }
+}

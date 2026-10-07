@@ -79,15 +79,26 @@ export function SiteHeader() {
 
         <div className="-mr-1.5 flex items-center gap-1 md:hidden">
           <ThemeToggle />
+          {/* Both icons render; aria-expanded picks one via CSS, so the same
+              markup works with React (dev) and the static runtime (prod). */}
           <button
             type="button"
-            className={iconLinkClass}
+            className={`group ${iconLinkClass}`}
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
           >
-            <Icon icon={open ? Cancel01Icon : Menu01Icon} size={18} />
+            <Icon
+              icon={Menu01Icon}
+              size={18}
+              className="group-aria-expanded:hidden"
+            />
+            <Icon
+              icon={Cancel01Icon}
+              size={18}
+              className="hidden group-aria-expanded:block"
+            />
           </button>
         </div>
       </Container>

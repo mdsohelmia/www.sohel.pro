@@ -36,6 +36,7 @@ export function ThemeToggle({ className }: { className?: string }) {
     <button
       type="button"
       onClick={toggle}
+      data-theme-toggle
       aria-label="Toggle dark mode"
       className={cn(
         "inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors duration-200 hover:bg-muted hover:text-foreground",

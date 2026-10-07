@@ -1,5 +1,3 @@
-import { writeFile } from "node:fs/promises"
-import { fileURLToPath } from "node:url"
 import { defineConfig } from "vite"
 import { tanstackStart } from "@tanstack/react-start/plugin/vite"
 import viteReact from "@vitejs/plugin-react"
@@ -40,21 +38,6 @@ const config = defineConfig({
           prerender: {
             enabled: true,
             outputPath: "/404.html",
-            // Hosts serve this file at arbitrary URLs, where the client router
-            // can't reproduce the prerendered markup. Ship it as plain HTML so
-            // there is no hydration mismatch.
-            onSuccess: ({ html }) =>
-              writeFile(
-                fileURLToPath(
-                  new URL("./dist/client/404.html", import.meta.url)
-                ),
-                html
-                  .replace(
-                    /<script\b(?![^>]*data-theme-script)[\s\S]*?<\/script>/g,
-                    ""
-                  )
-                  .replace(/<link rel="modulepreload"[^>]*>/g, "")
-              ),
           },
           sitemap: { exclude: true },
         },

@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router"
 import {
   ArrowRight01Icon,
   Github01Icon,
+  Mail01Icon,
   NewTwitterIcon,
 } from "@hugeicons/core-free-icons"
 import { Icon } from "@/components/site/icon"
@@ -31,6 +32,7 @@ const personJsonLd = {
   alternateName: site.name,
   jobTitle: site.title,
   url: site.url,
+  email: site.email,
   image: `${site.url}${site.avatar}`,
   sameAs: [site.social.github.url, site.social.x.url],
   worksFor: {
@@ -170,6 +172,13 @@ function Hero() {
             className="inline-flex size-10 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-200 hover:bg-muted hover:text-foreground"
           >
             <Icon icon={NewTwitterIcon} size={17} />
+          </a>
+          <a
+            href={`mailto:${site.email}`}
+            aria-label={`Email ${site.email}`}
+            className="inline-flex size-10 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-200 hover:bg-muted hover:text-foreground"
+          >
+            <Icon icon={Mail01Icon} size={18} />
           </a>
         </div>
       </div>
@@ -431,6 +440,15 @@ function AboutSection() {
           </li>
         ))}
       </ul>
+      <p className="mt-10 text-[15px] text-muted-foreground">
+        Get in touch:{" "}
+        <a
+          href={`mailto:${site.email}`}
+          className="font-medium text-foreground underline decoration-border-strong underline-offset-4 transition-colors duration-200 hover:text-brand hover:decoration-brand"
+        >
+          {site.email}
+        </a>
+      </p>
     </Section>
   )
 }

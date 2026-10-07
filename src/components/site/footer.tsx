@@ -1,5 +1,9 @@
 import { Link } from "@tanstack/react-router"
-import { Github01Icon, NewTwitterIcon } from "@hugeicons/core-free-icons"
+import {
+  Github01Icon,
+  Mail01Icon,
+  NewTwitterIcon,
+} from "@hugeicons/core-free-icons"
 import { Icon } from "./icon"
 import { Container } from "./primitives"
 import { site } from "@/data/site"
@@ -46,6 +50,10 @@ export function SiteFooter() {
             className={linkClass}
           >
             <Icon icon={NewTwitterIcon} size={14} />X
+          </a>
+          <a href={`mailto:${site.email}`} className={linkClass}>
+            <Icon icon={Mail01Icon} size={15} />
+            Email
           </a>
         </nav>
       </Container>

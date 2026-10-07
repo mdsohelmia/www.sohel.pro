@@ -9,6 +9,7 @@ export const site = {
   ogImage: "https://sohel.pro/og.png",
   avatar: "/sohel.jpg",
   avatarSmall: "/sohel-80.jpg",
+  email: "sohelcse1999@gmail.com",
   copyrightYear: 2026,
   social: {
     github: {

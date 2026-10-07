@@ -3,6 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router"
 import {
   Cancel01Icon,
   Github01Icon,
+  Mail01Icon,
   Menu01Icon,
   NewTwitterIcon,
 } from "@hugeicons/core-free-icons"
@@ -66,6 +67,13 @@ export function SiteHeader() {
           >
             <Icon icon={NewTwitterIcon} size={16} />
           </a>
+          <a
+            href={`mailto:${site.email}`}
+            className={iconLinkClass}
+            aria-label={`Email ${site.email}`}
+          >
+            <Icon icon={Mail01Icon} size={17} />
+          </a>
         </nav>
 
         <button
@@ -113,6 +121,13 @@ export function SiteHeader() {
               className="inline-flex h-9 items-center gap-2 rounded-md border px-3 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
             >
               <Icon icon={NewTwitterIcon} size={15} />X
+            </a>
+            <a
+              href={`mailto:${site.email}`}
+              className="inline-flex h-9 items-center gap-2 rounded-md border px-3 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
+            >
+              <Icon icon={Mail01Icon} size={16} />
+              Email
             </a>
           </div>
         </Container>

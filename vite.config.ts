@@ -45,7 +45,10 @@ const config = defineConfig({
                   new URL("./dist/client/404.html", import.meta.url)
                 ),
                 html
-                  .replace(/<script\b[\s\S]*?<\/script>/g, "")
+                  .replace(
+                    /<script\b(?![^>]*data-theme-script)[\s\S]*?<\/script>/g,
+                    ""
+                  )
                   .replace(/<link rel="modulepreload"[^>]*>/g, "")
               ),
           },

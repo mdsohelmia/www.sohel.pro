@@ -8,9 +8,9 @@ import {
   NewTwitterIcon,
 } from "@hugeicons/core-free-icons"
 import { Icon } from "./icon"
+import { ThemeToggle } from "./theme-toggle"
 import { Container } from "./primitives"
 import { nav, site } from "@/data/site"
-import { cn } from "@/lib/utils"
 
 const navLinkClass =
   "rounded-md px-2.5 py-1.5 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground data-[status=active]:text-foreground"
@@ -74,18 +74,22 @@ export function SiteHeader() {
           >
             <Icon icon={Mail01Icon} size={17} />
           </a>
+          <ThemeToggle />
         </nav>
 
-        <button
-          type="button"
-          className={cn(iconLinkClass, "-mr-1.5 md:hidden")}
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <Icon icon={open ? Cancel01Icon : Menu01Icon} size={18} />
-        </button>
+        <div className="-mr-1.5 flex items-center gap-1 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            className={iconLinkClass}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((v) => !v)}
+          >
+            <Icon icon={open ? Cancel01Icon : Menu01Icon} size={18} />
+          </button>
+        </div>
       </Container>
 
       <nav

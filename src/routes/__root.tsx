@@ -2,6 +2,7 @@ import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { SiteHeader } from "@/components/site/header"
 import { SiteFooter } from "@/components/site/footer"
 import { NotFound } from "@/components/site/not-found"
+import { themeScript } from "@/components/site/theme-toggle"
 import { site } from "@/data/site"
 
 import appCss from "../styles.css?url"
@@ -12,8 +13,7 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "theme-color", content: "#fcfcfd" },
-      { name: "color-scheme", content: "light" },
+      { name: "color-scheme", content: "light dark" },
       { name: "author", content: site.name },
       { title: `${site.name} — ${site.title}` },
       { name: "description", content: site.description },
@@ -39,8 +39,13 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    // The theme script sets a class on <html> before hydration.
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script
+          data-theme-script
+          dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
         <HeadContent />
       </head>
       <body>

@@ -3,7 +3,7 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --font-heading: var(--font-sans);
@@ -33,6 +33,8 @@
   --color-background: var(--background);
   --color-brand: var(--brand);
   --color-brand-soft: var(--brand-soft);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-soft-foreground: var(--brand-soft-foreground);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -43,29 +45,65 @@
 }
 
 :root {
-  --background: oklch(0.991 0.001 260);
-  --foreground: oklch(0.18 0.006 260);
+  color-scheme: light;
+  /* Surfaces: page < card. Neutrals carry a faint cool tint toward the brand
+     blue so the greys feel related to the accent. */
+  --background: oklch(0.99 0.002 260);
+  --foreground: oklch(0.19 0.008 262);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.006 260);
+  --card-foreground: oklch(0.19 0.008 262);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.006 260);
-  --primary: oklch(0.18 0.006 260);
+  --popover-foreground: oklch(0.19 0.008 262);
+  --primary: oklch(0.19 0.008 262);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.965 0.002 260);
-  --secondary-foreground: oklch(0.18 0.006 260);
-  --muted: oklch(0.965 0.002 260);
-  --muted-foreground: oklch(0.47 0.008 260);
-  --subtle-foreground: oklch(0.51 0.008 260);
-  --accent: oklch(0.965 0.002 260);
-  --accent-foreground: oklch(0.18 0.006 260);
+  --secondary: oklch(0.965 0.004 262);
+  --secondary-foreground: oklch(0.19 0.008 262);
+  --muted: oklch(0.965 0.004 262);
+  --muted-foreground: oklch(0.46 0.012 262);
+  --subtle-foreground: oklch(0.51 0.012 262);
+  --accent: oklch(0.965 0.004 262);
+  --accent-foreground: oklch(0.19 0.008 262);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.925 0.003 260);
-  --border-strong: oklch(0.86 0.004 260);
-  --input: oklch(0.925 0.003 260);
-  --ring: oklch(0.53 0.19 262);
-  --brand: oklch(0.53 0.19 262);
+  --border: oklch(0.922 0.005 262);
+  --border-strong: oklch(0.85 0.008 262);
+  --input: oklch(0.922 0.005 262);
+  --ring: oklch(0.55 0.2 262);
+  /* Accent: one blue, used sparingly — links on hover, focus, status, "now". */
+  --brand: oklch(0.55 0.2 262);
+  --brand-foreground: oklch(0.99 0 0);
   --brand-soft: oklch(0.96 0.025 262);
+  --brand-soft-foreground: oklch(0.45 0.18 262);
+  --shadow-color: oklch(0.19 0.02 262 / 0.1);
   --radius: 0.625rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: oklch(0.155 0.008 262);
+  --foreground: oklch(0.95 0.004 262);
+  --card: oklch(0.19 0.009 262);
+  --card-foreground: oklch(0.95 0.004 262);
+  --popover: oklch(0.19 0.009 262);
+  --popover-foreground: oklch(0.95 0.004 262);
+  --primary: oklch(0.95 0.004 262);
+  --primary-foreground: oklch(0.17 0.008 262);
+  --secondary: oklch(0.22 0.01 262);
+  --secondary-foreground: oklch(0.95 0.004 262);
+  --muted: oklch(0.22 0.01 262);
+  --muted-foreground: oklch(0.74 0.01 262);
+  --subtle-foreground: oklch(0.64 0.012 262);
+  --accent: oklch(0.22 0.01 262);
+  --accent-foreground: oklch(0.95 0.004 262);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 8%);
+  --border-strong: oklch(1 0 0 / 15%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.7 0.15 262);
+  --brand: oklch(0.7 0.15 262);
+  --brand-foreground: oklch(0.16 0.02 262);
+  --brand-soft: oklch(0.26 0.06 262);
+  --brand-soft-foreground: oklch(0.82 0.09 262);
+  --shadow-color: oklch(0 0 0 / 0.5);
 }
 
 @layer base {

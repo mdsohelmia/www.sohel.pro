@@ -55,7 +55,7 @@ export function CareerLadder({
                 className={cn(
                   "relative z-10 mt-1 flex size-9 items-center justify-center rounded-full border font-mono text-[11px] font-medium tabular-nums",
                   step.current
-                    ? "border-brand bg-brand text-white"
+                    ? "border-brand bg-brand text-brand-foreground"
                     : i === (showNow ? 1 : 0)
                       ? "border-foreground/80 bg-card text-foreground"
                       : "bg-card text-subtle-foreground"

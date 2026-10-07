@@ -16,11 +16,10 @@ import {
   Tag,
 } from "@/components/site/primitives"
 import { CareerLadder } from "@/components/site/career"
-import { ProductCard, RepoCard } from "@/components/site/cards"
+import { ProductCard } from "@/components/site/cards"
 import { about, hero, site } from "@/data/site"
 import { education } from "@/data/education"
 import { featuredProject, projects, tenbyteProjects } from "@/data/projects"
-import { github, repositories } from "@/data/github"
 import { posts, writing } from "@/data/writing"
 import { cn } from "@/lib/utils"
 import { seo } from "@/lib/seo"
@@ -97,7 +96,6 @@ function Home() {
           ))}
         </div>
       </Section>
-      <OpenSource />
       <WritingSection />
       <AboutSection />
     </>
@@ -321,63 +319,6 @@ function CurrentlyBuilding() {
   )
 }
 
-function OpenSource() {
-  const featured = repositories.filter((r) => r.featured)
-  const rest = repositories.filter((r) => !r.featured).slice(0, 3)
-  return (
-    <Section
-      id="open-source"
-      label="GitHub"
-      title="Open source & engineering"
-      intro="I build systems, tools, and infrastructure in public."
-    >
-      <div className="mb-8 flex flex-col gap-6 rounded-xl border bg-card p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex items-center gap-3">
-          <span className="flex size-10 items-center justify-center rounded-full border bg-background">
-            <Icon icon={Github01Icon} size={20} />
-          </span>
-          <div>
-            <p className="text-xs text-subtle-foreground">GitHub</p>
-            <ExternalLink
-              href={github.url}
-              className="font-mono text-sm font-medium"
-            >
-              {github.username}
-            </ExternalLink>
-          </div>
-        </div>
-        <dl className="grid grid-cols-3 gap-6 lg:flex lg:gap-10">
-          {github.stats.map((s) => (
-            <div key={s.label} className="flex flex-col-reverse gap-0.5">
-              <dt className="text-xs text-subtle-foreground">{s.label}</dt>
-              <dd className="text-lg font-semibold tracking-[-0.02em] tabular-nums">
-                {s.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-      <div className="grid gap-4 sm:grid-cols-2">
-        {[...featured, ...rest].map((r) => (
-          <RepoCard key={r.name} repo={r} />
-        ))}
-      </div>
-      <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:gap-6">
-        <h3 className="shrink-0 font-mono text-[11px] tracking-[0.14em] text-subtle-foreground uppercase">
-          Working with
-        </h3>
-        <ul className="flex flex-wrap gap-2" aria-label="Technologies">
-          {about.technologies.map((t) => (
-            <li key={t}>
-              <Tag className="font-mono text-foreground/80">{t}</Tag>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Section>
-  )
-}
-
 function WritingSection() {
   return (
     <Section
@@ -440,6 +381,18 @@ function AboutSection() {
           </li>
         ))}
       </ul>
+      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:gap-6">
+        <h3 className="shrink-0 font-mono text-[11px] tracking-[0.14em] text-subtle-foreground uppercase">
+          Working with
+        </h3>
+        <ul className="flex flex-wrap gap-2" aria-label="Technologies">
+          {about.technologies.map((t) => (
+            <li key={t}>
+              <Tag className="font-mono text-foreground/80">{t}</Tag>
+            </li>
+          ))}
+        </ul>
+      </div>
       <p className="mt-10 text-[15px] text-muted-foreground">
         Get in touch:{" "}
         <a

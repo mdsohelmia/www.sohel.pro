@@ -197,7 +197,14 @@ export function Tag({
 export function StatusBadge({ status }: { status: string }) {
   const active = status === "Building" || status === "Live"
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border bg-card px-2.5 py-0.5 text-xs font-medium text-foreground">
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium",
+        active
+          ? "border-brand/20 bg-brand-soft text-brand-soft-foreground"
+          : "bg-card text-foreground"
+      )}
+    >
       <span
         aria-hidden
         className={cn(

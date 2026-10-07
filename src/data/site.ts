@@ -2,13 +2,20 @@ export const site = {
   name: "Sohel",
   legalName: "MD. Sohel Mia",
   brand: "SOHEL.PRO",
-  title: "Founder & Product Engineer",
-  url: "https://sohel.pro",
+  // Visible role, used in the footer, career ladder and Person.jobTitle.
+  title: "Founder & Software Engineer",
+  // Longer positioning used in the homepage <title>.
+  seoTitle: "Founder, Software Engineer & AI SaaS Builder",
+  // Canonical origin. sohel.pro redirects here (Cloudflare redirect rule).
+  url: "https://www.sohel.pro",
   description:
-    "Sohel is a founder and product engineer, and Co-founder & CTO of Tenbyte, building AI-native software products and cloud, CDN and video infrastructure.",
-  ogImage: "https://sohel.pro/og.png",
-  avatar: "/sohel.jpg",
-  avatarSmall: "/sohel-80.jpg",
+    "Sohel is a founder and software engineer building AI-native SaaS, e-commerce software, and high-performance infrastructure.",
+  ogImage: "https://www.sohel.pro/og-sohel-founder-software-engineer.png",
+  ogImageAlt:
+    "Sohel — Founder, Software Engineer & AI SaaS Builder. I build software products.",
+  avatar: "/sohel-founder-software-engineer.webp",
+  avatarSmall: "/sohel-founder-software-engineer-80.webp",
+  avatarAlt: "Sohel, founder and software engineer",
   email: "sohelcse1999@gmail.com",
   copyrightYear: 2026,
   social: {
@@ -29,23 +36,24 @@ export type NavItem = { label: string; to: string }
 
 export const nav: NavItem[] = [
   { label: "Now", to: "/now" },
-  { label: "Products", to: "/products" },
+  { label: "Projects", to: "/projects" },
   { label: "Experience", to: "/experience" },
   { label: "Writing", to: "/writing" },
   { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
 ]
 
 export const hero = {
-  eyebrow: "Entrepreneur · Founder · Product Engineer",
-  headline: "I build software products.",
+  eyebrow: "Founder · Software Engineer · AI SaaS Builder",
+  headline: "I’m Sohel. I build software products.",
   secondary: "AI-native software, SaaS products, and infrastructure.",
   description:
-    "I'm Sohel, a founder and product engineer. I build software products and the systems behind them—from AI-native SaaS to high-performance infrastructure.",
+    "I'm a founder and software engineer. I build software products and the systems behind them—from AI-native SaaS and e-commerce software to high-performance infrastructure.",
 }
 
 export const about = {
   intro:
-    "I'm Sohel, an entrepreneur, founder and product engineer focused on building AI-native software products and infrastructure.",
+    "I'm Sohel, an entrepreneur, founder and software engineer focused on building AI-native SaaS, e-commerce software and infrastructure.",
   background:
     "My background spans software engineering, technical leadership, cloud infrastructure, CDN, video systems, distributed systems and product development.",
   statement:

@@ -4,6 +4,7 @@ import { companies, experience } from "@/data/experience"
 import { education } from "@/data/education"
 import { projects, tenbyteProjects, type Project } from "@/data/projects"
 import { faq } from "@/data/faq"
+import { publishedPosts, writing } from "@/data/writing"
 import { canonicalUrl } from "@/lib/url"
 
 // /llms.txt (https://llmstxt.org): a plain-Markdown summary of the site for
@@ -11,16 +12,16 @@ import { canonicalUrl } from "@/lib/url"
 // pages and prerendered as a static file.
 
 const product = (p: Project) =>
-  `- [${p.name}](${canonicalUrl(`/products/${p.slug}`)}): ${p.summary}${
+  `- [${p.name}](${canonicalUrl(`/projects/${p.slug}`)}): ${p.summary}${
     p.role ? ` Role: ${p.role}.` : ""
   }${p.status ? ` Status: ${p.status}.` : ""}`
 
 function body() {
   return `# ${site.name}
 
-> ${site.description}
+> ${site.name} — ${site.seoTitle}. ${site.description}
 
-${site.name} (full name: ${site.legalName}) is an entrepreneur, founder and product engineer. He is the Co-founder & CTO of [Tenbyte](${companies.tenbyte.website}) and has built every Tenbyte product from the beginning. He also builds independent AI-native software products and infrastructure.
+${site.name} (full name: ${site.legalName}) is an entrepreneur, founder and software engineer. He is the Co-founder & CTO of [Tenbyte](${companies.tenbyte.website}) and has built every Tenbyte product from the beginning. He also builds independent AI-native SaaS, e-commerce software and high-performance infrastructure.
 
 ${about.statement}
 
@@ -59,6 +60,19 @@ ${about.focus.join(", ")}
 
 ${faq.map((item) => `### ${item.q}\n\n${item.a}`).join("\n\n")}
 
+## Writing
+
+${
+  publishedPosts.length
+    ? publishedPosts
+        .map(
+          (p) =>
+            `- [${p.title}](${p.externalUrl ?? canonicalUrl(`/writing/${p.slug}`)}) (${p.datePublished})${p.description ? `: ${p.description}` : ""}`
+        )
+        .join("\n")
+    : `${writing.intro} First pieces are in progress.`
+}
+
 ## Contact
 
 - Email: ${site.email}
@@ -70,9 +84,11 @@ ${faq.map((item) => `### ${item.q}\n\n${item.a}`).join("\n\n")}
 - [Home](${canonicalUrl("/")})
 - [About](${canonicalUrl("/about")})
 - [Experience](${canonicalUrl("/experience")})
-- [Products](${canonicalUrl("/products")})
+- [Projects](${canonicalUrl("/projects")})
 - [Now](${canonicalUrl("/now")})
 - [Writing](${canonicalUrl("/writing")})
+- [Contact](${canonicalUrl("/contact")})
+- [Tenbyte (Co-founder & CTO)](${canonicalUrl("/experience/tenbyte")})
 `
 }
 

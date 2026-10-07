@@ -18,6 +18,8 @@ export type Project = {
   product?: string
   howItWorks?: string[]
   technology?: string[]
+  // Engineering problems worth explaining. Only add first-hand, real ones.
+  challenges?: string[]
   role?: string
   status?: ProjectStatus
   links?: { label: string; url: string }[]
@@ -45,7 +47,7 @@ export const projects: Project[] = [
       "Organizes what comes in.",
       "Tracks what is still missing.",
     ],
-    role: "Founder & Product Engineer",
+    role: "Founder & Software Engineer",
     status: "Building",
     featured: true,
     buildingInPublic: true,

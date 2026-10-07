@@ -11,14 +11,17 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as R404RouteImport } from './routes/404'
+import { Route as RedirectsRouteImport } from './routes/[_]redirects'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as NowRouteImport } from './routes/now'
-import { Route as WritingRouteImport } from './routes/writing'
 import { Route as ExperienceIndexRouteImport } from './routes/experience/index'
 import { Route as ExperienceCompanyRouteImport } from './routes/experience/$company'
-import { Route as ProductsIndexRouteImport } from './routes/products/index'
-import { Route as ProductsSlugRouteImport } from './routes/products/$slug'
+import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
+import { Route as ProjectsSlugRouteImport } from './routes/projects/$slug'
+import { Route as WritingIndexRouteImport } from './routes/writing/index'
+import { Route as WritingSlugRouteImport } from './routes/writing/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,9 +33,19 @@ const R404Route = R404RouteImport.update({
   path: '/404',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RedirectsRoute = RedirectsRouteImport.update({
+  id: '/_redirects',
+  path: '/_redirects',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
@@ -45,11 +58,6 @@ const NowRoute = NowRouteImport.update({
   path: '/now',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WritingRoute = WritingRouteImport.update({
-  id: '/writing',
-  path: '/writing',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ExperienceIndexRoute = ExperienceIndexRouteImport.update({
   id: '/experience/',
   path: '/experience/',
@@ -60,104 +68,135 @@ const ExperienceCompanyRoute = ExperienceCompanyRouteImport.update({
   path: '/experience/$company',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsIndexRoute = ProductsIndexRouteImport.update({
-  id: '/products/',
-  path: '/products/',
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsSlugRoute = ProductsSlugRouteImport.update({
-  id: '/products/$slug',
-  path: '/products/$slug',
+const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
+  id: '/projects/$slug',
+  path: '/projects/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WritingIndexRoute = WritingIndexRouteImport.update({
+  id: '/writing/',
+  path: '/writing/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WritingSlugRoute = WritingSlugRouteImport.update({
+  id: '/writing/$slug',
+  path: '/writing/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/_redirects': typeof RedirectsRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/now': typeof NowRoute
-  '/writing': typeof WritingRoute
   '/experience/$company': typeof ExperienceCompanyRoute
-  '/products/$slug': typeof ProductsSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/writing/$slug': typeof WritingSlugRoute
   '/experience/': typeof ExperienceIndexRoute
-  '/products/': typeof ProductsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/writing/': typeof WritingIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/_redirects': typeof RedirectsRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/now': typeof NowRoute
-  '/writing': typeof WritingRoute
   '/experience/$company': typeof ExperienceCompanyRoute
-  '/products/$slug': typeof ProductsSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/writing/$slug': typeof WritingSlugRoute
   '/experience': typeof ExperienceIndexRoute
-  '/products': typeof ProductsIndexRoute
+  '/projects': typeof ProjectsIndexRoute
+  '/writing': typeof WritingIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/_redirects': typeof RedirectsRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/now': typeof NowRoute
-  '/writing': typeof WritingRoute
   '/experience/$company': typeof ExperienceCompanyRoute
-  '/products/$slug': typeof ProductsSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/writing/$slug': typeof WritingSlugRoute
   '/experience/': typeof ExperienceIndexRoute
-  '/products/': typeof ProductsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/writing/': typeof WritingIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/404'
+    | '/_redirects'
     | '/about'
+    | '/contact'
     | '/llms.txt'
     | '/now'
-    | '/writing'
     | '/experience/$company'
-    | '/products/$slug'
+    | '/projects/$slug'
+    | '/writing/$slug'
     | '/experience/'
-    | '/products/'
+    | '/projects/'
+    | '/writing/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/404'
+    | '/_redirects'
     | '/about'
+    | '/contact'
     | '/llms.txt'
     | '/now'
-    | '/writing'
     | '/experience/$company'
-    | '/products/$slug'
+    | '/projects/$slug'
+    | '/writing/$slug'
     | '/experience'
-    | '/products'
+    | '/projects'
+    | '/writing'
   id:
     | '__root__'
     | '/'
     | '/404'
+    | '/_redirects'
     | '/about'
+    | '/contact'
     | '/llms.txt'
     | '/now'
-    | '/writing'
     | '/experience/$company'
-    | '/products/$slug'
+    | '/projects/$slug'
+    | '/writing/$slug'
     | '/experience/'
-    | '/products/'
+    | '/projects/'
+    | '/writing/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
+  RedirectsRoute: typeof RedirectsRoute
   AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   NowRoute: typeof NowRoute
-  WritingRoute: typeof WritingRoute
   ExperienceCompanyRoute: typeof ExperienceCompanyRoute
-  ProductsSlugRoute: typeof ProductsSlugRoute
+  ProjectsSlugRoute: typeof ProjectsSlugRoute
+  WritingSlugRoute: typeof WritingSlugRoute
   ExperienceIndexRoute: typeof ExperienceIndexRoute
-  ProductsIndexRoute: typeof ProductsIndexRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
+  WritingIndexRoute: typeof WritingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -176,11 +215,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof R404RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_redirects': {
+      id: '/_redirects'
+      path: '/_redirects'
+      fullPath: '/_redirects'
+      preLoaderRoute: typeof RedirectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/llms.txt': {
@@ -197,13 +250,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NowRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/writing': {
-      id: '/writing'
-      path: '/writing'
-      fullPath: '/writing'
-      preLoaderRoute: typeof WritingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/experience/': {
       id: '/experience/'
       path: '/experience'
@@ -218,18 +264,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExperienceCompanyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/': {
-      id: '/products/'
-      path: '/products'
-      fullPath: '/products/'
-      preLoaderRoute: typeof ProductsIndexRouteImport
+    '/projects/': {
+      id: '/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/$slug': {
-      id: '/products/$slug'
-      path: '/products/$slug'
-      fullPath: '/products/$slug'
-      preLoaderRoute: typeof ProductsSlugRouteImport
+    '/projects/$slug': {
+      id: '/projects/$slug'
+      path: '/projects/$slug'
+      fullPath: '/projects/$slug'
+      preLoaderRoute: typeof ProjectsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/writing/': {
+      id: '/writing/'
+      path: '/writing'
+      fullPath: '/writing/'
+      preLoaderRoute: typeof WritingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/writing/$slug': {
+      id: '/writing/$slug'
+      path: '/writing/$slug'
+      fullPath: '/writing/$slug'
+      preLoaderRoute: typeof WritingSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -238,14 +298,17 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
+  RedirectsRoute: RedirectsRoute,
   AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
   NowRoute: NowRoute,
-  WritingRoute: WritingRoute,
   ExperienceCompanyRoute: ExperienceCompanyRoute,
-  ProductsSlugRoute: ProductsSlugRoute,
+  ProjectsSlugRoute: ProjectsSlugRoute,
+  WritingSlugRoute: WritingSlugRoute,
   ExperienceIndexRoute: ExperienceIndexRoute,
-  ProductsIndexRoute: ProductsIndexRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
+  WritingIndexRoute: WritingIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

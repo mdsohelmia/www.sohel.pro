@@ -16,15 +16,15 @@ import {
 import { seo } from "@/lib/seo"
 import { breadcrumbs, productNode, webPage } from "@/lib/schema"
 
-export const Route = createFileRoute("/products/")({
+export const Route = createFileRoute("/projects/")({
   head: () =>
     seo({
-      title: "Products",
+      title: "Projects",
       description:
-        "Products Sohel has built: every Tenbyte product from the beginning—Vidinfra, Tenbyte CDN, Tenbyte Cloud, Live Stream—plus independent products like DocLoop.",
-      path: "/products",
+        "Projects and products Sohel has built: every Tenbyte product from the beginning—Vidinfra, Tenbyte CDN, Tenbyte Cloud, Live Stream—plus DocLoop and Sellorio.",
+      path: "/projects",
       schema: [
-        webPage("/products", "Products", "CollectionPage", {
+        webPage("/projects", "Projects", "CollectionPage", {
           mainEntity: {
             "@type": "ItemList",
             itemListElement: allProjects.map((p, i) => ({
@@ -34,16 +34,16 @@ export const Route = createFileRoute("/products/")({
             })),
           },
         }),
-        breadcrumbs([{ name: "Products", path: "/products" }]),
+        breadcrumbs([{ name: "Projects", path: "/projects" }]),
       ],
     }),
-  component: ProductsPage,
+  component: ProjectsPage,
 })
 
-function ProductsPage() {
+function ProjectsPage() {
   return (
     <>
-      <PageHeader eyebrow={<Eyebrow>Products</Eyebrow>} title="Products">
+      <PageHeader eyebrow={<Eyebrow>Projects</Eyebrow>} title="Projects">
         <p>
           Software products and infrastructure projects I'm building or have
           helped build.

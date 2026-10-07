@@ -9,7 +9,12 @@ import { Container, Eyebrow, Tag } from "@/components/site/primitives"
 import { companies, type Company } from "@/data/experience"
 import { allProjects } from "@/data/projects"
 import { seo } from "@/lib/seo"
-import { breadcrumbs, organizationNode, webPage } from "@/lib/schema"
+import {
+  breadcrumbs,
+  organizationNode,
+  personNode,
+  webPage,
+} from "@/lib/schema"
 import { cn } from "@/lib/utils"
 
 export const Route = createFileRoute("/experience/$company")({
@@ -26,6 +31,7 @@ export const Route = createFileRoute("/experience/$company")({
           description: `Sohel at ${loaderData.name}: ${loaderData.roles.join(" → ")}. ${loaderData.summary}`,
           path: `/experience/${params.company}`,
           schema: [
+            personNode,
             organizationNode(params.company),
             webPage(`/experience/${params.company}`, loaderData.name),
             breadcrumbs([
@@ -62,7 +68,10 @@ function CompanyPage() {
         <h1 className="mt-5 text-4xl font-semibold tracking-[-0.04em] sm:text-6xl">
           {c.name}
         </h1>
-        <p className="mt-5 max-w-2xl text-[17px] leading-8 text-pretty text-muted-foreground">
+        <p className="mt-5 max-w-2xl text-xl font-medium tracking-[-0.015em] text-pretty text-foreground/85">
+          {c.lead}
+        </p>
+        <p className="mt-3 max-w-2xl text-[17px] leading-8 text-pretty text-muted-foreground">
           {c.summary}
         </p>
       </Container>
@@ -115,7 +124,7 @@ function CompanyPage() {
                     <li key={name}>
                       {product ? (
                         <Link
-                          to="/products/$slug"
+                          to="/projects/$slug"
                           params={{ slug: product.slug }}
                           className="inline-flex items-center rounded-full border bg-card px-2.5 py-0.5 text-xs text-foreground/80 transition-colors duration-200 hover:border-border-strong hover:text-brand"
                         >

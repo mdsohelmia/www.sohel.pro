@@ -54,6 +54,8 @@ export type Company = {
   // Roles held, earliest first.
   roles: string[]
   summary: string
+  // One factual sentence stating Sohel's relationship to the company.
+  lead: string
   about: string[]
   areas: string[]
   products?: string[]
@@ -67,6 +69,7 @@ export const companies: Record<Company["slug"], Company> = {
     name: "Tenbyte",
     website: "https://www.tenbyte.io/",
     roles: ["Co-founder & CTO"],
+    lead: "Sohel is the co-founder and CTO of Tenbyte.",
     summary:
       "A technology infrastructure company building cloud, CDN and video infrastructure. I've built every Tenbyte product from the beginning.",
     about: [
@@ -98,6 +101,7 @@ export const companies: Record<Company["slug"], Company> = {
     name: "Gotipath",
     website: "https://www.gotipath.com/",
     roles: ["Software Engineer", "Senior Software Engineer", "Tech Lead"],
+    lead: "Sohel grew from Software Engineer to Senior Software Engineer and then Tech Lead at Gotipath.",
     summary:
       "An infrastructure company working across cloud, CDN and video technology.",
     about: [
@@ -120,6 +124,7 @@ export const companies: Record<Company["slug"], Company> = {
     name: "Kodeeo",
     website: "https://www.kodeeo.com/",
     roles: ["Software Engineer"],
+    lead: "Sohel started his career at Kodeeo as a Software Engineer.",
     summary: "A software development company—and where my career started.",
     about: [
       "Kodeeo is a software development company.",

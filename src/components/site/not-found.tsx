@@ -17,8 +17,8 @@ export function NotFound() {
         <Link to="/" className="hover:text-brand">
           Back to home
         </Link>
-        <Link to="/products" className="text-muted-foreground hover:text-brand">
-          Products
+        <Link to="/projects" className="text-muted-foreground hover:text-brand">
+          Projects
         </Link>
         <Link
           to="/experience"

@@ -18,7 +18,7 @@ export function ProductCard({ project }: { project: Project }) {
       </div>
       <h3 className="mt-6 text-lg font-semibold tracking-[-0.02em]">
         <Link
-          to="/products/$slug"
+          to="/projects/$slug"
           params={{ slug: project.slug }}
           className="outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-brand"
         >

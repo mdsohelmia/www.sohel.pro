@@ -13,7 +13,7 @@ import { canonicalUrl, seo } from "@/lib/seo"
 import { breadcrumbs, productNode, webPage } from "@/lib/schema"
 import { cn } from "@/lib/utils"
 
-export const Route = createFileRoute("/products/$slug")({
+export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
     const project = getProject(params.slug)
     if (!project) throw notFound()
@@ -26,17 +26,17 @@ export const Route = createFileRoute("/products/$slug")({
             ? `${loaderData.name} by ${loaderData.company}`
             : loaderData.name,
           description: `${loaderData.name}: ${loaderData.summary}`,
-          path: `/products/${params.slug}`,
+          path: `/projects/${params.slug}`,
           schema: [
             productNode(loaderData),
-            webPage(`/products/${params.slug}`, loaderData.name, "WebPage", {
+            webPage(`/projects/${params.slug}`, loaderData.name, "WebPage", {
               mainEntity: {
-                "@id": `${canonicalUrl(`/products/${params.slug}`)}#product`,
+                "@id": `${canonicalUrl(`/projects/${params.slug}`)}#product`,
               },
             }),
             breadcrumbs([
-              { name: "Products", path: "/products" },
-              { name: loaderData.name, path: `/products/${params.slug}` },
+              { name: "Projects", path: "/projects" },
+              { name: loaderData.name, path: `/projects/${params.slug}` },
             ]),
           ],
         })
@@ -48,11 +48,11 @@ function ProductPage() {
   const p = Route.useLoaderData()
 
   const sections: { label: string; content: React.ReactNode }[] = []
+  if (p.product)
+    sections.push({ label: "What it is", content: <P>{p.product}</P> })
   if (p.problem)
     sections.push({ label: "Problem", content: <P>{p.problem}</P> })
   if (p.why) sections.push({ label: "Why I built it", content: <P>{p.why}</P> })
-  if (p.product)
-    sections.push({ label: "Product", content: <P>{p.product}</P> })
   if (p.howItWorks)
     sections.push({
       label: "How it works",
@@ -80,6 +80,23 @@ function ProductPage() {
           {p.technology.map((t) => (
             <li key={t}>
               <Tag>{t}</Tag>
+            </li>
+          ))}
+        </ul>
+      ),
+    })
+  if (p.challenges?.length)
+    sections.push({
+      label: "Key technical challenges",
+      content: (
+        <ul className="grid gap-2 text-[15px] leading-7 text-foreground/85">
+          {p.challenges.map((c) => (
+            <li key={c} className="flex gap-3">
+              <span
+                aria-hidden
+                className="mt-3 h-px w-3 shrink-0 bg-border-strong"
+              />
+              {c}
             </li>
           ))}
         </ul>
@@ -130,11 +147,11 @@ function ProductPage() {
     <article>
       <Container className="pt-10 sm:pt-14">
         <Link
-          to="/products"
+          to="/projects"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
         >
           <Icon icon={ArrowLeft01Icon} size={15} />
-          Products
+          Projects
         </Link>
       </Container>
       <Container className="pt-10 pb-12 sm:pt-14 sm:pb-16">

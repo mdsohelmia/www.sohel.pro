@@ -48,7 +48,7 @@ function NowPage() {
               {now.building.note}
             </p>
             <ArrowLink
-              to="/products/$slug"
+              to="/projects/$slug"
               params={{ slug: now.building.slug }}
               className="mt-4"
             >

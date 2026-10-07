@@ -5,6 +5,7 @@ import { site, about } from "@/data/site"
 import { education } from "@/data/education"
 import { companies, experience } from "@/data/experience"
 import type { Project } from "@/data/projects"
+import type { Post } from "@/data/writing"
 import { canonicalUrl } from "./url"
 
 type Node = Record<string, unknown>
@@ -114,10 +115,10 @@ export function breadcrumbs(trail: { name: string; path: string }[]): Node {
 export function productNode(p: Project): Node {
   return {
     "@type": "SoftwareApplication",
-    "@id": `${canonicalUrl(`/products/${p.slug}`)}#product`,
+    "@id": `${canonicalUrl(`/projects/${p.slug}`)}#product`,
     name: p.name,
     description: p.summary,
-    url: p.links?.[0]?.url ?? canonicalUrl(`/products/${p.slug}`),
+    url: p.links?.[0]?.url ?? canonicalUrl(`/projects/${p.slug}`),
     applicationCategory: p.categories.includes("AI SaaS")
       ? "BusinessApplication"
       : "DeveloperApplication",
@@ -136,6 +137,26 @@ export function organizationNode(slug: string): Node {
     name: c.name,
     url: c.website,
     description: c.summary,
+  }
+}
+
+export function articleNode(p: Post): Node {
+  const url = canonicalUrl(`/writing/${p.slug}`)
+  return {
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: p.title,
+    description: p.description,
+    url,
+    mainEntityOfPage: { "@id": `${url}#webpage` },
+    datePublished: p.datePublished,
+    dateModified: p.dateModified ?? p.datePublished,
+    author: { "@id": ids.person },
+    publisher: { "@id": ids.person },
+    image: site.ogImage,
+    articleSection: p.category,
+    inLanguage: "en",
+    isPartOf: { "@id": ids.website },
   }
 }
 

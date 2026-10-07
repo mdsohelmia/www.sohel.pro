@@ -18,4 +18,4 @@ User-agent: Applebot-Extended
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://sohel.pro/sitemap.xml
+Sitemap: https://www.sohel.pro/sitemap.xml

@@ -19,7 +19,9 @@ import { CareerLadder } from "@/components/site/career"
 import { ProductCard } from "@/components/site/cards"
 import { about, hero, site } from "@/data/site"
 import { featuredProject, projects, tenbyteProjects } from "@/data/projects"
-import { posts, writing } from "@/data/writing"
+import { isPublished, posts, publishedPosts, writing } from "@/data/writing"
+import { PostList } from "@/components/site/posts"
+import { ContactLinks } from "@/components/site/contact"
 import { cn } from "@/lib/utils"
 import { seo } from "@/lib/seo"
 import {
@@ -39,7 +41,7 @@ export const Route = createFileRoute("/")({
         websiteNode,
         personNode,
         tenbyteNode,
-        webPage("/", `${site.name} — ${site.title}`, "ProfilePage", {
+        webPage("/", `${site.name} — ${site.seoTitle}`, "ProfilePage", {
           mainEntity: { "@id": ids.person },
         }),
       ],
@@ -62,8 +64,8 @@ function Home() {
       <TenbyteSection />
       <CurrentlyBuilding />
       <Section
-        id="career"
-        label="Career"
+        id="experience"
+        label="Experience"
         title="From engineer to founder"
         intro="My career started with building software. Over time, I moved into technical leadership and eventually co-founded a technology company focused on cloud, CDN and video infrastructure."
         action={<ArrowLink to="/experience">View experience</ArrowLink>}
@@ -75,7 +77,7 @@ function Home() {
         label="Products"
         title="Products"
         intro="Things I'm building, co-building, and experimenting with."
-        action={<ArrowLink to="/products">All products</ArrowLink>}
+        action={<ArrowLink to="/projects">All projects</ArrowLink>}
       >
         <div className="grid gap-4 sm:grid-cols-2">
           {projects.map((p) => (
@@ -83,8 +85,10 @@ function Home() {
           ))}
         </div>
       </Section>
+      <EngineeringSection />
       <WritingSection />
       <AboutSection />
+      <ContactSection />
     </>
   )
 }
@@ -100,16 +104,14 @@ function Hero() {
         <div className="flex items-center gap-3">
           <img
             src={site.avatarSmall}
-            alt=""
+            alt={site.avatarAlt}
             width={40}
             height={40}
             fetchPriority="high"
-            className="size-10 rounded-full border bg-muted object-cover"
+            decoding="async"
+            className="size-10 shrink-0 rounded-full border bg-muted object-cover"
           />
-          <div className="flex min-w-0 flex-col gap-1">
-            <p className="text-sm leading-none font-medium">{site.name}</p>
-            <Eyebrow className="leading-[1.5]">{hero.eyebrow}</Eyebrow>
-          </div>
+          <Eyebrow className="min-w-0 leading-[1.5]">{hero.eyebrow}</Eyebrow>
         </div>
         <h1 className="mt-8 max-w-3xl text-[2.6rem] leading-[1.05] font-semibold tracking-[-0.045em] text-balance sm:text-6xl md:text-7xl">
           {hero.headline}
@@ -132,7 +134,7 @@ function Hero() {
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <Link
-            to="/products"
+            to="/projects"
             className="inline-flex h-10 items-center gap-2 rounded-lg bg-foreground px-4 text-sm font-medium text-background transition-colors duration-200 hover:bg-foreground/85"
           >
             View products
@@ -215,7 +217,7 @@ function TenbyteSection() {
         {tenbyteProjects.map((p) => (
           <li key={p.slug}>
             <Link
-              to="/products/$slug"
+              to="/projects/$slug"
               params={{ slug: p.slug }}
               className="group grid gap-1.5 p-5 transition-colors duration-200 hover:bg-muted/50 sm:grid-cols-[11rem_minmax(0,1fr)_auto] sm:items-baseline sm:gap-6 sm:px-6"
             >
@@ -272,7 +274,7 @@ function CurrentlyBuilding() {
               {p.product ?? p.summary}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-              <ArrowLink to="/products/$slug" params={{ slug: p.slug }}>
+              <ArrowLink to="/projects/$slug" params={{ slug: p.slug }}>
                 View project
               </ArrowLink>
               {p.buildingInPublic && (
@@ -312,7 +314,42 @@ function CurrentlyBuilding() {
   )
 }
 
+function EngineeringSection() {
+  return (
+    <Section
+      id="engineering"
+      label="Engineering"
+      title="Engineering"
+      intro="Most of my engineering work is infrastructure—cloud, CDN, video and distributed systems at Tenbyte and Gotipath—and, increasingly, AI-native SaaS."
+    >
+      <div className="grid gap-8">
+        <div>
+          <h3 className="mb-3 text-sm font-semibold">Languages & tools</h3>
+          <ul className="flex flex-wrap gap-2" aria-label="Technologies">
+            {about.technologies.map((t) => (
+              <li key={t}>
+                <Tag className="font-mono text-foreground/80">{t}</Tag>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 className="mb-3 text-sm font-semibold">Areas</h3>
+          <ul className="flex flex-wrap gap-2" aria-label="Focus areas">
+            {about.focus.map((f) => (
+              <li key={f}>
+                <Tag>{f}</Tag>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </Section>
+  )
+}
+
 function WritingSection() {
+  const list = [...publishedPosts, ...posts.filter((p) => !isPublished(p))]
   return (
     <Section
       id="writing"
@@ -321,30 +358,7 @@ function WritingSection() {
       intro={writing.intro}
       action={<ArrowLink to="/writing">All writing</ArrowLink>}
     >
-      <ul className="border-t">
-        {posts.slice(0, 4).map((post) => (
-          <li
-            key={post.title}
-            className="flex flex-col gap-1 border-b py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
-          >
-            {post.url ? (
-              <a
-                href={post.url}
-                className="text-[15px] font-medium transition-colors duration-200 hover:text-brand"
-              >
-                {post.title}
-              </a>
-            ) : (
-              <span className="text-[15px] font-medium text-foreground/85">
-                {post.title}
-              </span>
-            )}
-            <span className="shrink-0 font-mono text-[11px] tracking-[0.08em] text-subtle-foreground uppercase">
-              {post.category} · {post.date ?? "Upcoming"}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <PostList posts={list.slice(0, 4)} />
     </Section>
   )
 }
@@ -355,7 +369,7 @@ function AboutSection() {
       id="about"
       label="About"
       title="About Sohel"
-      action={<ArrowLink to="/about">More about me</ArrowLink>}
+      action={<ArrowLink to="/about">More about Sohel</ArrowLink>}
     >
       <blockquote className="max-w-2xl text-2xl leading-snug font-medium tracking-[-0.025em] text-balance sm:text-[1.75rem]">
         “{about.statement}”
@@ -364,37 +378,22 @@ function AboutSection() {
         <p>{about.intro}</p>
         <p>{about.background}</p>
       </div>
-      <ul
-        className="mt-8 flex max-w-2xl flex-wrap gap-2"
-        aria-label="Focus areas"
-      >
-        {about.focus.map((f) => (
-          <li key={f}>
-            <Tag>{f}</Tag>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:gap-6">
-        <h3 className="shrink-0 font-mono text-[11px] tracking-[0.14em] text-subtle-foreground uppercase">
-          Working with
-        </h3>
-        <ul className="flex flex-wrap gap-2" aria-label="Technologies">
-          {about.technologies.map((t) => (
-            <li key={t}>
-              <Tag className="font-mono text-foreground/80">{t}</Tag>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <p className="mt-10 text-[15px] text-muted-foreground">
-        Get in touch:{" "}
-        <a
-          href={`mailto:${site.email}`}
-          className="font-medium text-foreground underline decoration-border-strong underline-offset-4 transition-colors duration-200 hover:text-brand hover:decoration-brand"
-        >
-          {site.email}
-        </a>
+    </Section>
+  )
+}
+
+function ContactSection() {
+  return (
+    <Section
+      id="contact"
+      label="Contact"
+      title="Contact"
+      action={<ArrowLink to="/contact">Contact page</ArrowLink>}
+    >
+      <p className="max-w-xl text-[15px] leading-7 text-muted-foreground">
+        The best way to reach me is email. I'm also on X and GitHub.
       </p>
+      <ContactLinks className="mt-6" />
     </Section>
   )
 }

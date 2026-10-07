@@ -4,6 +4,7 @@ import { about, site } from "./site"
 import { companies, experience } from "./experience"
 import { education } from "./education"
 import { featuredProject, tenbyteProjects } from "./projects"
+import { publishedPosts, writing } from "./writing"
 
 const list = (items: string[]) =>
   items.length < 2
@@ -15,11 +16,15 @@ const career = [...experience].reverse().map((e) => `${e.role} at ${e.company}`)
 export const faq: { q: string; a: string }[] = [
   {
     q: "Who is Sohel?",
-    a: `Sohel (${site.legalName}) is an entrepreneur, founder and product engineer. He is the Co-founder & CTO of Tenbyte, a cloud, CDN and video infrastructure company, and builds AI-native software products and infrastructure.`,
+    a: `Sohel (${site.legalName}) is a founder and software engineer. He is the Co-founder & CTO of Tenbyte, a cloud, CDN and video infrastructure company, and builds AI-native SaaS, e-commerce software and high-performance infrastructure.`,
   },
   {
     q: "What does Sohel do at Tenbyte?",
     a: `Sohel co-founded Tenbyte and serves as its CTO. He has built every Tenbyte product from the beginning: ${list(tenbyteProjects.map((p) => p.name))}.`,
+  },
+  {
+    q: "Which companies has Sohel co-founded?",
+    a: `Sohel is the co-founder of ${companies.tenbyte.name} (${companies.tenbyte.website.replace(/^https:\/\/(www\.)?|\/$/g, "")}), where he is CTO. He is also the founder of ${featuredProject.name}, an AI SaaS product he is building.`,
   },
   {
     q: "What is Sohel building now?",
@@ -36,6 +41,14 @@ export const faq: { q: string; a: string }[] = [
   {
     q: "What technologies does Sohel work with?",
     a: `${list(about.technologies)}.`,
+  },
+  {
+    q: "What does Sohel write about?",
+    a: `${writing.intro.replace(/^Notes on/, "Sohel writes about")} ${
+      publishedPosts.length
+        ? `Recent writing: ${list(publishedPosts.slice(0, 3).map((p) => `“${p.title}”`))}.`
+        : "His first pieces are in progress."
+    }`,
   },
   {
     q: "How can I contact Sohel?",

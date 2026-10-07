@@ -25,12 +25,14 @@ const config = defineConfig({
       // Index routes are also discovered with a trailing slash; keep them out
       // of the sitemap so only canonical URLs are listed.
       pages: [
-        ...["/products/", "/experience/"].map((path) => ({
+        ...["/projects/", "/experience/", "/writing/"].map((path) => ({
           path,
           sitemap: { exclude: true },
         })),
         // Plain-Markdown site summary for AI assistants (see llms[.]txt.ts).
         { path: "/llms.txt", sitemap: { exclude: true } },
+        // Cloudflare redirect rules (see [_]redirects.ts).
+        { path: "/_redirects", sitemap: { exclude: true } },
         // Static hosts (Cloudflare Pages, Netlify, Vercel) serve /404.html for
         // unknown URLs.
         {
@@ -59,7 +61,7 @@ const config = defineConfig({
       ],
       sitemap: {
         enabled: true,
-        host: "https://sohel.pro",
+        host: "https://www.sohel.pro",
       },
     }),
     viteReact(),

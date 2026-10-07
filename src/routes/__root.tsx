@@ -15,7 +15,7 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "color-scheme", content: "light dark" },
       { name: "author", content: site.name },
-      { title: `${site.name} — ${site.title}` },
+      { title: `${site.name} — ${site.seoTitle}` },
       { name: "description", content: site.description },
     ],
     links: [
@@ -54,6 +54,19 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <script
           data-theme-script
           dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
+        {/* Rendered here rather than in head(): the head manager keeps one
+            meta per name, which would drop one of the two variants. Colours
+            match --background in each theme. */}
+        <meta
+          name="theme-color"
+          content="#fafaf7"
+          media="(prefers-color-scheme: light)"
+        />
+        <meta
+          name="theme-color"
+          content="#141412"
+          media="(prefers-color-scheme: dark)"
         />
         <HeadContent />
       </head>

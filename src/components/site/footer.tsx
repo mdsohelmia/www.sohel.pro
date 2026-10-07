@@ -9,9 +9,11 @@ import { Container } from "./primitives"
 import { site } from "@/data/site"
 
 const footerNav = [
-  { label: "Products", to: "/products" },
+  { label: "Projects", to: "/projects" },
   { label: "Experience", to: "/experience" },
   { label: "Writing", to: "/writing" },
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
 ] as const
 
 const linkClass =

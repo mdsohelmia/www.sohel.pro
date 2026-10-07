@@ -4,6 +4,15 @@
   // so the Worker only serves assets. No server code runs.
   "name": "sohel-pro",
   "compatibility_date": "2026-10-07",
+  // Keep the *.workers.dev URL as a preview; pages declare sohel.pro as
+  // canonical, so it doesn't compete in search.
+  "workers_dev": true,
+  // sohel.pro is canonical; www serves the same site and pages declare
+  // https://sohel.pro as canonical.
+  "routes": [
+    { "pattern": "sohel.pro", "custom_domain": true },
+    { "pattern": "www.sohel.pro", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./dist/client",
     // Canonical URLs have no trailing slash: /about serves about/index.html

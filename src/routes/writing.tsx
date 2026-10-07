@@ -7,6 +7,7 @@ import {
 } from "@/components/site/primitives"
 import { posts, publishedPosts, writing } from "@/data/writing"
 import { seo } from "@/lib/seo"
+import { breadcrumbs, webPage } from "@/lib/schema"
 
 export const Route = createFileRoute("/writing")({
   head: () =>
@@ -14,6 +15,10 @@ export const Route = createFileRoute("/writing")({
       title: "Writing",
       description: `Sohel's writing. ${writing.intro}`,
       path: "/writing",
+      schema: [
+        webPage("/writing", "Writing"),
+        breadcrumbs([{ name: "Writing", path: "/writing" }]),
+      ],
     }),
   component: WritingPage,
 })

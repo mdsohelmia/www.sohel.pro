@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as NowRouteImport } from './routes/now'
 import { Route as WritingRouteImport } from './routes/writing'
 import { Route as ExperienceIndexRouteImport } from './routes/experience/index'
@@ -32,6 +33,11 @@ const R404Route = R404RouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NowRoute = NowRouteImport.update({
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/about': typeof AboutRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/now': typeof NowRoute
   '/writing': typeof WritingRoute
   '/experience/$company': typeof ExperienceCompanyRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/about': typeof AboutRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/now': typeof NowRoute
   '/writing': typeof WritingRoute
   '/experience/$company': typeof ExperienceCompanyRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/about': typeof AboutRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/now': typeof NowRoute
   '/writing': typeof WritingRoute
   '/experience/$company': typeof ExperienceCompanyRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/about'
+    | '/llms.txt'
     | '/now'
     | '/writing'
     | '/experience/$company'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/about'
+    | '/llms.txt'
     | '/now'
     | '/writing'
     | '/experience/$company'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/about'
+    | '/llms.txt'
     | '/now'
     | '/writing'
     | '/experience/$company'
@@ -139,6 +151,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   AboutRoute: typeof AboutRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   NowRoute: typeof NowRoute
   WritingRoute: typeof WritingRoute
   ExperienceCompanyRoute: typeof ExperienceCompanyRoute
@@ -168,6 +181,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/now': {
@@ -219,6 +239,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
   AboutRoute: AboutRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   NowRoute: NowRoute,
   WritingRoute: WritingRoute,
   ExperienceCompanyRoute: ExperienceCompanyRoute,

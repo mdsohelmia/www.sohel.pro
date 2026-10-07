@@ -9,6 +9,7 @@ import { Container, Eyebrow, Tag } from "@/components/site/primitives"
 import { companies, type Company } from "@/data/experience"
 import { allProjects } from "@/data/projects"
 import { seo } from "@/lib/seo"
+import { breadcrumbs, organizationNode, webPage } from "@/lib/schema"
 import { cn } from "@/lib/utils"
 
 export const Route = createFileRoute("/experience/$company")({
@@ -24,6 +25,17 @@ export const Route = createFileRoute("/experience/$company")({
           title: `${loaderData.name} — ${loaderData.roles.join(" → ")}`,
           description: `Sohel at ${loaderData.name}: ${loaderData.roles.join(" → ")}. ${loaderData.summary}`,
           path: `/experience/${params.company}`,
+          schema: [
+            organizationNode(params.company),
+            webPage(`/experience/${params.company}`, loaderData.name),
+            breadcrumbs([
+              { name: "Experience", path: "/experience" },
+              {
+                name: loaderData.name,
+                path: `/experience/${params.company}`,
+              },
+            ]),
+          ],
         })
       : {},
   component: CompanyPage,

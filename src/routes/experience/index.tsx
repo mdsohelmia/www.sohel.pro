@@ -12,14 +12,23 @@ import {
 import { companies } from "@/data/experience"
 import { about } from "@/data/site"
 import { seo } from "@/lib/seo"
+import { breadcrumbs, ids, personNode, webPage } from "@/lib/schema"
 
 export const Route = createFileRoute("/experience/")({
   head: () =>
     seo({
       title: "Experience",
       description:
-        "Sohel's path from Software Engineer at Kodeeo, to Senior Software Engineer and Tech Lead at Gotipath, to Co-founder & CTO at Tenbyte, to Founder & Product Engineer.",
+        "Sohel's career: Software Engineer at Kodeeo; Software Engineer, Senior Software Engineer and Tech Lead at Gotipath; Co-founder & CTO at Tenbyte.",
       path: "/experience",
+      type: "profile",
+      schema: [
+        personNode,
+        webPage("/experience", "Experience", "ProfilePage", {
+          mainEntity: { "@id": ids.person },
+        }),
+        breadcrumbs([{ name: "Experience", path: "/experience" }]),
+      ],
     }),
   component: ExperiencePage,
 })

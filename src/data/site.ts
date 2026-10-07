@@ -5,7 +5,7 @@ export const site = {
   title: "Founder & Product Engineer",
   url: "https://sohel.pro",
   description:
-    "Sohel is a founder and product engineer building software products, AI systems, and infrastructure.",
+    "Sohel is a founder and product engineer, and Co-founder & CTO of Tenbyte, building software products, AI systems and cloud, CDN and video infrastructure.",
   ogImage: "https://sohel.pro/og.png",
   avatar: "/sohel.jpg",
   avatarSmall: "/sohel-80.jpg",

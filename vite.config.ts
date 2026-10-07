@@ -29,6 +29,8 @@ const config = defineConfig({
           path,
           sitemap: { exclude: true },
         })),
+        // Plain-Markdown site summary for AI assistants (see llms[.]txt.ts).
+        { path: "/llms.txt", sitemap: { exclude: true } },
         // Static hosts (Cloudflare Pages, Netlify, Vercel) serve /404.html for
         // unknown URLs.
         {

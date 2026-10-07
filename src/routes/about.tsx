@@ -16,6 +16,8 @@ import {
 } from "@/components/site/primitives"
 import { about, site } from "@/data/site"
 import { seo } from "@/lib/seo"
+import { breadcrumbs, faqNode, ids, personNode, webPage } from "@/lib/schema"
+import { faq } from "@/data/faq"
 
 export const Route = createFileRoute("/about")({
   head: () =>
@@ -24,6 +26,14 @@ export const Route = createFileRoute("/about")({
       description: about.intro.replace("I'm Sohel,", "Sohel is"),
       path: "/about",
       type: "profile",
+      schema: [
+        personNode,
+        webPage("/about", "About Sohel", "ProfilePage", {
+          mainEntity: { "@id": ids.person },
+        }),
+        faqNode(faq),
+        breadcrumbs([{ name: "About", path: "/about" }]),
+      ],
     }),
   component: AboutPage,
 })
@@ -116,6 +126,29 @@ function AboutPage() {
             Education
           </h2>
           <EducationList />
+        </Container>
+      </section>
+
+      <section aria-labelledby="faq-heading" className="border-t">
+        <Container className="grid gap-10 py-16 sm:py-20 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-16">
+          <h2
+            id="faq-heading"
+            className="font-mono text-[11px] tracking-[0.14em] text-subtle-foreground uppercase"
+          >
+            Questions
+          </h2>
+          <div className="max-w-2xl border-t">
+            {faq.map((item) => (
+              <div key={item.q} className="border-b py-5">
+                <h3 className="text-[15px] font-semibold tracking-[-0.01em]">
+                  {item.q}
+                </h3>
+                <p className="mt-1.5 text-[15px] leading-7 text-pretty text-muted-foreground">
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
 

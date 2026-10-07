@@ -9,6 +9,7 @@ import {
 import { now } from "@/data/now"
 import { getProject } from "@/data/projects"
 import { seo } from "@/lib/seo"
+import { breadcrumbs, webPage } from "@/lib/schema"
 
 export const Route = createFileRoute("/now")({
   head: () =>
@@ -16,6 +17,10 @@ export const Route = createFileRoute("/now")({
       title: "Now",
       description: `What Sohel is focused on right now: building ${now.building.name}, exploring AI agents and AI-native SaaS.`,
       path: "/now",
+      schema: [
+        webPage("/now", "Now"),
+        breadcrumbs([{ name: "Now", path: "/now" }]),
+      ],
     }),
   component: NowPage,
 })

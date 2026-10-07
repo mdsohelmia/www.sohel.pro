@@ -7,16 +7,35 @@ import {
   ExternalLink,
   PageHeader,
 } from "@/components/site/primitives"
-import { projects, tenbyteProjects, type Project } from "@/data/projects"
+import {
+  allProjects,
+  projects,
+  tenbyteProjects,
+  type Project,
+} from "@/data/projects"
 import { seo } from "@/lib/seo"
+import { breadcrumbs, productNode, webPage } from "@/lib/schema"
 
 export const Route = createFileRoute("/products/")({
   head: () =>
     seo({
       title: "Products",
       description:
-        "Software products and infrastructure Sohel has built: every Tenbyte product from the beginning—Vidinfra, Tenbyte CDN, Tenbyte Cloud, Live Stream—plus independent products like DocLoop.",
+        "Products Sohel has built: every Tenbyte product from the beginning—Vidinfra, Tenbyte CDN, Tenbyte Cloud, Live Stream—plus independent products like DocLoop.",
       path: "/products",
+      schema: [
+        webPage("/products", "Products", "CollectionPage", {
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: allProjects.map((p, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              item: productNode(p),
+            })),
+          },
+        }),
+        breadcrumbs([{ name: "Products", path: "/products" }]),
+      ],
     }),
   component: ProductsPage,
 })

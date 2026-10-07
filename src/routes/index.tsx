@@ -18,45 +18,32 @@ import {
 import { CareerLadder } from "@/components/site/career"
 import { ProductCard } from "@/components/site/cards"
 import { about, hero, site } from "@/data/site"
-import { education } from "@/data/education"
 import { featuredProject, projects, tenbyteProjects } from "@/data/projects"
 import { posts, writing } from "@/data/writing"
 import { cn } from "@/lib/utils"
 import { seo } from "@/lib/seo"
-
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: site.legalName,
-  alternateName: site.name,
-  jobTitle: site.title,
-  url: site.url,
-  email: site.email,
-  image: `${site.url}${site.avatar}`,
-  sameAs: [site.social.github.url, site.social.x.url],
-  worksFor: {
-    "@type": "Organization",
-    name: "Tenbyte",
-    url: "https://www.tenbyte.io/",
-  },
-  knowsAbout: [...about.focus, ...about.technologies],
-  alumniOf: education.map((e) => ({
-    "@type": "CollegeOrUniversity",
-    name: e.institution,
-    url: e.website,
-  })),
-}
+import {
+  ids,
+  personNode,
+  tenbyteNode,
+  webPage,
+  websiteNode,
+} from "@/lib/schema"
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    ...seo({ path: "/", type: "profile" }),
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify(personJsonLd),
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      path: "/",
+      type: "profile",
+      schema: [
+        websiteNode,
+        personNode,
+        tenbyteNode,
+        webPage("/", `${site.name} — ${site.title}`, "ProfilePage", {
+          mainEntity: { "@id": ids.person },
+        }),
+      ],
+    }),
   component: Home,
 })
 

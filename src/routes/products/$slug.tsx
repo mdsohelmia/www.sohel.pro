@@ -9,7 +9,8 @@ import {
   Tag,
 } from "@/components/site/primitives"
 import { getProject } from "@/data/projects"
-import { seo } from "@/lib/seo"
+import { canonicalUrl, seo } from "@/lib/seo"
+import { breadcrumbs, productNode, webPage } from "@/lib/schema"
 import { cn } from "@/lib/utils"
 
 export const Route = createFileRoute("/products/$slug")({
@@ -21,9 +22,23 @@ export const Route = createFileRoute("/products/$slug")({
   head: ({ loaderData, params }) =>
     loaderData
       ? seo({
-          title: loaderData.name,
-          description: `${loaderData.name} — ${loaderData.summary}`,
+          title: loaderData.company
+            ? `${loaderData.name} by ${loaderData.company}`
+            : loaderData.name,
+          description: `${loaderData.name}: ${loaderData.summary}`,
           path: `/products/${params.slug}`,
+          schema: [
+            productNode(loaderData),
+            webPage(`/products/${params.slug}`, loaderData.name, "WebPage", {
+              mainEntity: {
+                "@id": `${canonicalUrl(`/products/${params.slug}`)}#product`,
+              },
+            }),
+            breadcrumbs([
+              { name: "Products", path: "/products" },
+              { name: loaderData.name, path: `/products/${params.slug}` },
+            ]),
+          ],
         })
       : {},
   component: ProductPage,

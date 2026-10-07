@@ -104,104 +104,110 @@ function Home() {
 
 function Hero() {
   return (
-    <Container className="pt-20 pb-16 sm:pt-32 sm:pb-24">
-      <div className="flex items-center gap-3">
-        <img
-          src={site.avatarSmall}
-          alt=""
-          width={40}
-          height={40}
-          fetchPriority="high"
-          className="size-10 rounded-full border bg-muted object-cover"
-        />
-        <div className="flex min-w-0 flex-col gap-1">
-          <p className="text-sm leading-none font-medium">{site.name}</p>
-          <Eyebrow className="leading-[1.5]">{hero.eyebrow}</Eyebrow>
+    <div className="relative isolate">
+      <div
+        aria-hidden
+        className="dot-grid pointer-events-none absolute inset-0 -z-10"
+      />
+      <Container className="pt-20 pb-16 sm:pt-32 sm:pb-24">
+        <div className="flex items-center gap-3">
+          <img
+            src={site.avatarSmall}
+            alt=""
+            width={40}
+            height={40}
+            fetchPriority="high"
+            className="size-10 rounded-full border bg-muted object-cover"
+          />
+          <div className="flex min-w-0 flex-col gap-1">
+            <p className="text-sm leading-none font-medium">{site.name}</p>
+            <Eyebrow className="leading-[1.5]">{hero.eyebrow}</Eyebrow>
+          </div>
         </div>
-      </div>
-      <h1 className="mt-8 max-w-3xl text-[2.6rem] leading-[1.05] font-semibold tracking-[-0.045em] text-balance sm:text-6xl md:text-7xl">
-        {hero.headline}
-      </h1>
-      <p className="mt-4 max-w-3xl text-2xl leading-tight font-medium tracking-[-0.03em] text-balance text-subtle-foreground sm:text-3xl md:text-4xl">
-        {hero.secondary}
-      </p>
-      <p className="mt-8 max-w-xl text-[17px] leading-8 text-pretty text-muted-foreground">
-        {hero.description}
-      </p>
-      <p className="mt-4 text-[15px] text-muted-foreground">
-        Co-founder & CTO at{" "}
-        <ExternalLink
-          href="https://www.tenbyte.io/"
-          className="font-medium text-foreground"
-        >
-          Tenbyte
-        </ExternalLink>
-      </p>
+        <h1 className="mt-8 max-w-3xl text-[2.6rem] leading-[1.05] font-semibold tracking-[-0.045em] text-balance sm:text-6xl md:text-7xl">
+          {hero.headline}
+        </h1>
+        <p className="mt-4 max-w-3xl text-2xl leading-tight font-medium tracking-[-0.03em] text-balance text-subtle-foreground sm:text-3xl md:text-4xl">
+          {hero.secondary}
+        </p>
+        <p className="mt-8 max-w-xl text-[17px] leading-8 text-pretty text-muted-foreground">
+          {hero.description}
+        </p>
+        <p className="mt-4 text-[15px] text-muted-foreground">
+          Co-founder & CTO at{" "}
+          <ExternalLink
+            href="https://www.tenbyte.io/"
+            className="font-medium text-foreground"
+          >
+            Tenbyte
+          </ExternalLink>
+        </p>
 
-      <div className="mt-10 flex flex-wrap items-center gap-3">
-        <Link
-          to="/products"
-          className="inline-flex h-10 items-center gap-2 rounded-lg bg-foreground px-4 text-sm font-medium text-background transition-colors duration-200 hover:bg-foreground/85"
-        >
-          View products
-          <Icon icon={ArrowRight01Icon} size={16} />
-        </Link>
-        <Link
-          to="/experience"
-          className="inline-flex h-10 items-center rounded-lg border bg-card px-4 text-sm font-medium transition-colors duration-200 hover:border-border-strong hover:bg-muted"
-        >
-          My experience
-        </Link>
-        <div className="ml-1 flex items-center gap-1">
-          <a
-            href={site.social.github.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub (opens in a new tab)"
-            className="inline-flex size-10 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-200 hover:bg-muted hover:text-foreground"
+        <div className="mt-10 flex flex-wrap items-center gap-3">
+          <Link
+            to="/products"
+            className="inline-flex h-10 items-center gap-2 rounded-lg bg-foreground px-4 text-sm font-medium text-background transition-colors duration-200 hover:bg-foreground/85"
           >
-            <Icon icon={Github01Icon} size={18} />
-          </a>
-          <a
-            href={site.social.x.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="X (opens in a new tab)"
-            className="inline-flex size-10 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-200 hover:bg-muted hover:text-foreground"
+            View products
+            <Icon icon={ArrowRight01Icon} size={16} />
+          </Link>
+          <Link
+            to="/experience"
+            className="inline-flex h-10 items-center rounded-lg border bg-card px-4 text-sm font-medium transition-colors duration-200 hover:border-border-strong hover:bg-muted"
           >
-            <Icon icon={NewTwitterIcon} size={17} />
-          </a>
-          <a
-            href={`mailto:${site.email}`}
-            aria-label={`Email ${site.email}`}
-            className="inline-flex size-10 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-200 hover:bg-muted hover:text-foreground"
-          >
-            <Icon icon={Mail01Icon} size={18} />
-          </a>
+            My experience
+          </Link>
+          <div className="ml-1 flex items-center gap-1">
+            <a
+              href={site.social.github.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub (opens in a new tab)"
+              className="inline-flex size-10 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-200 hover:bg-muted hover:text-foreground"
+            >
+              <Icon icon={Github01Icon} size={18} />
+            </a>
+            <a
+              href={site.social.x.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (opens in a new tab)"
+              className="inline-flex size-10 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-200 hover:bg-muted hover:text-foreground"
+            >
+              <Icon icon={NewTwitterIcon} size={17} />
+            </a>
+            <a
+              href={`mailto:${site.email}`}
+              aria-label={`Email ${site.email}`}
+              className="inline-flex size-10 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-200 hover:bg-muted hover:text-foreground"
+            >
+              <Icon icon={Mail01Icon} size={18} />
+            </a>
+          </div>
         </div>
-      </div>
 
-      <ol
-        aria-label="Career progression"
-        className="mt-16 flex flex-wrap items-center gap-x-2 gap-y-2 font-mono text-[11px] tracking-[0.08em] text-subtle-foreground uppercase sm:mt-20"
-      >
-        {careerTrack.map((step, i) => {
-          const last = i === careerTrack.length - 1
-          return (
-            <li key={step} className="flex items-center gap-2">
-              <span className={cn(last && "text-brand")}>{step}</span>
-              {!last && (
-                <Icon
-                  icon={ArrowRight01Icon}
-                  size={12}
-                  className="text-border-strong"
-                />
-              )}
-            </li>
-          )
-        })}
-      </ol>
-    </Container>
+        <ol
+          aria-label="Career progression"
+          className="mt-16 flex flex-wrap items-center gap-x-2 gap-y-2 font-mono text-[11px] tracking-[0.08em] text-subtle-foreground uppercase sm:mt-20"
+        >
+          {careerTrack.map((step, i) => {
+            const last = i === careerTrack.length - 1
+            return (
+              <li key={step} className="flex items-center gap-2">
+                <span className={cn(last && "text-brand")}>{step}</span>
+                {!last && (
+                  <Icon
+                    icon={ArrowRight01Icon}
+                    size={12}
+                    className="text-border-strong"
+                  />
+                )}
+              </li>
+            )
+          })}
+        </ol>
+      </Container>
+    </div>
   )
 }
 

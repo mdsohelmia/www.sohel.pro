@@ -46,54 +46,56 @@
 
 :root {
   color-scheme: light;
-  /* Surfaces: page < card. Neutrals carry a faint cool tint toward the brand
-     blue so the greys feel related to the accent. */
-  --background: oklch(0.99 0.002 260);
-  --foreground: oklch(0.19 0.008 262);
+  /* Warm paper: neutrals lean slightly yellow so the page reads like paper
+     rather than a screen. Cards stay pure white to lift off it. */
+  --background: oklch(0.985 0.004 95);
+  --foreground: oklch(0.2 0.005 90);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.19 0.008 262);
+  --card-foreground: oklch(0.2 0.005 90);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.19 0.008 262);
-  --primary: oklch(0.19 0.008 262);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.965 0.004 262);
-  --secondary-foreground: oklch(0.19 0.008 262);
-  --muted: oklch(0.965 0.004 262);
-  --muted-foreground: oklch(0.46 0.012 262);
-  --subtle-foreground: oklch(0.51 0.012 262);
-  --accent: oklch(0.965 0.004 262);
-  --accent-foreground: oklch(0.19 0.008 262);
+  --popover-foreground: oklch(0.2 0.005 90);
+  --primary: oklch(0.2 0.005 90);
+  --primary-foreground: oklch(0.985 0.004 95);
+  --secondary: oklch(0.96 0.005 95);
+  --secondary-foreground: oklch(0.2 0.005 90);
+  --muted: oklch(0.96 0.005 95);
+  --muted-foreground: oklch(0.46 0.008 90);
+  --subtle-foreground: oklch(0.51 0.008 90);
+  --accent: oklch(0.96 0.005 95);
+  --accent-foreground: oklch(0.2 0.005 90);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0.005 262);
-  --border-strong: oklch(0.85 0.008 262);
-  --input: oklch(0.922 0.005 262);
+  --border: oklch(0.915 0.006 95);
+  --border-strong: oklch(0.845 0.008 95);
+  --input: oklch(0.915 0.006 95);
   --ring: oklch(0.55 0.2 262);
   /* Accent: one blue, used sparingly — links on hover, focus, status, "now". */
   --brand: oklch(0.55 0.2 262);
   --brand-foreground: oklch(0.99 0 0);
-  --brand-soft: oklch(0.96 0.025 262);
+  --brand-soft: oklch(0.955 0.025 262);
   --brand-soft-foreground: oklch(0.45 0.18 262);
-  --shadow-color: oklch(0.19 0.02 262 / 0.1);
+  --shadow-color: oklch(0.2 0.01 90 / 0.1);
+  --dot-color: oklch(0.2 0.005 90 / 0.16);
   --radius: 0.625rem;
 }
 
 .dark {
   color-scheme: dark;
-  --background: oklch(0.155 0.008 262);
-  --foreground: oklch(0.95 0.004 262);
-  --card: oklch(0.19 0.009 262);
-  --card-foreground: oklch(0.95 0.004 262);
-  --popover: oklch(0.19 0.009 262);
-  --popover-foreground: oklch(0.95 0.004 262);
-  --primary: oklch(0.95 0.004 262);
-  --primary-foreground: oklch(0.17 0.008 262);
-  --secondary: oklch(0.22 0.01 262);
-  --secondary-foreground: oklch(0.95 0.004 262);
-  --muted: oklch(0.22 0.01 262);
-  --muted-foreground: oklch(0.74 0.01 262);
-  --subtle-foreground: oklch(0.64 0.012 262);
-  --accent: oklch(0.22 0.01 262);
-  --accent-foreground: oklch(0.95 0.004 262);
+  /* Warm charcoal to match the paper tone. */
+  --background: oklch(0.175 0.003 95);
+  --foreground: oklch(0.95 0.004 95);
+  --card: oklch(0.207 0.004 95);
+  --card-foreground: oklch(0.95 0.004 95);
+  --popover: oklch(0.207 0.004 95);
+  --popover-foreground: oklch(0.95 0.004 95);
+  --primary: oklch(0.95 0.004 95);
+  --primary-foreground: oklch(0.19 0.004 95);
+  --secondary: oklch(0.24 0.005 95);
+  --secondary-foreground: oklch(0.95 0.004 95);
+  --muted: oklch(0.24 0.005 95);
+  --muted-foreground: oklch(0.75 0.006 95);
+  --subtle-foreground: oklch(0.65 0.008 95);
+  --accent: oklch(0.24 0.005 95);
+  --accent-foreground: oklch(0.95 0.004 95);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 8%);
   --border-strong: oklch(1 0 0 / 15%);
@@ -101,9 +103,10 @@
   --ring: oklch(0.7 0.15 262);
   --brand: oklch(0.7 0.15 262);
   --brand-foreground: oklch(0.16 0.02 262);
-  --brand-soft: oklch(0.26 0.06 262);
-  --brand-soft-foreground: oklch(0.82 0.09 262);
+  --brand-soft: oklch(0.27 0.06 262);
+  --brand-soft-foreground: oklch(0.83 0.09 262);
   --shadow-color: oklch(0 0 0 / 0.5);
+  --dot-color: oklch(1 0 0 / 0.11);
 }
 
 @layer base {
@@ -127,6 +130,19 @@
   :focus-visible {
     @apply rounded-sm outline-2 outline-offset-2 outline-brand;
   }
+}
+
+/* Hero backdrop: a faint grid of dots, like nodes in a network, fading out
+   toward the edges so it never competes with the text. */
+.dot-grid {
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  background-position: -11px -11px;
+  mask-image: radial-gradient(
+    ellipse 75% 70% at 35% 40%,
+    #000 25%,
+    transparent 80%
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {

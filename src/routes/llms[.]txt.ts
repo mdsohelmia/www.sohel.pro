@@ -20,7 +20,7 @@ function body() {
 
 > ${site.description}
 
-${site.name} (full name: ${site.legalName}) is an entrepreneur, founder and product engineer. He is the Co-founder & CTO of [Tenbyte](${companies.tenbyte.website}) and has built every Tenbyte product from the beginning. He also builds independent software products, AI systems and infrastructure.
+${site.name} (full name: ${site.legalName}) is an entrepreneur, founder and product engineer. He is the Co-founder & CTO of [Tenbyte](${companies.tenbyte.website}) and has built every Tenbyte product from the beginning. He also builds independent AI-native software products and infrastructure.
 
 ${about.statement}
 

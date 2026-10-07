@@ -5,7 +5,7 @@ export const site = {
   title: "Founder & Product Engineer",
   url: "https://sohel.pro",
   description:
-    "Sohel is a founder and product engineer, and Co-founder & CTO of Tenbyte, building software products, AI systems and cloud, CDN and video infrastructure.",
+    "Sohel is a founder and product engineer, and Co-founder & CTO of Tenbyte, building AI-native software products and cloud, CDN and video infrastructure.",
   ogImage: "https://sohel.pro/og.png",
   avatar: "/sohel.jpg",
   avatarSmall: "/sohel-80.jpg",
@@ -38,14 +38,14 @@ export const nav: NavItem[] = [
 export const hero = {
   eyebrow: "Entrepreneur · Founder · Product Engineer",
   headline: "I build software products.",
-  secondary: "AI systems, SaaS products, and infrastructure.",
+  secondary: "AI-native software, SaaS products, and infrastructure.",
   description:
     "I'm Sohel, a founder and product engineer. I build software products and the systems behind them—from AI-native SaaS to high-performance infrastructure.",
 }
 
 export const about = {
   intro:
-    "I'm Sohel, an entrepreneur, founder and product engineer focused on building software products, AI systems, and infrastructure.",
+    "I'm Sohel, an entrepreneur, founder and product engineer focused on building AI-native software products and infrastructure.",
   background:
     "My background spans software engineering, technical leadership, cloud infrastructure, CDN, video systems, distributed systems and product development.",
   statement:
@@ -76,7 +76,7 @@ export const about = {
     "I started as a software engineer at Kodeeo, building production software and learning how real systems are made.",
     "At Gotipath, I grew from Software Engineer to Senior Software Engineer and then Tech Lead, taking on broader engineering and technical responsibilities across cloud, CDN and video infrastructure.",
     "Later, I co-founded Tenbyte as CTO and built every one of its products from the beginning—cloud, CDN, video and live streaming infrastructure.",
-    "Today, I combine that engineering background with product thinking to build software products, AI systems and infrastructure.",
+    "Today, I combine that engineering background with product thinking to build AI-native software products and infrastructure.",
   ],
   // Short four-beat version of the story, used on the homepage.
   arc: [

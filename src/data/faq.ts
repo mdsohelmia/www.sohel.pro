@@ -15,7 +15,7 @@ const career = [...experience].reverse().map((e) => `${e.role} at ${e.company}`)
 export const faq: { q: string; a: string }[] = [
   {
     q: "Who is Sohel?",
-    a: `Sohel (${site.legalName}) is an entrepreneur, founder and product engineer. He is the Co-founder & CTO of Tenbyte, a cloud, CDN and video infrastructure company, and builds software products, AI systems and infrastructure.`,
+    a: `Sohel (${site.legalName}) is an entrepreneur, founder and product engineer. He is the Co-founder & CTO of Tenbyte, a cloud, CDN and video infrastructure company, and builds AI-native software products and infrastructure.`,
   },
   {
     q: "What does Sohel do at Tenbyte?",

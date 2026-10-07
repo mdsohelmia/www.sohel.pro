@@ -1,12 +1,64 @@
+import { writeFile } from "node:fs/promises"
+import { fileURLToPath } from "node:url"
 import { defineConfig } from "vite"
-import { devtools } from "@tanstack/devtools-vite"
 import { tanstackStart } from "@tanstack/react-start/plugin/vite"
 import viteReact from "@vitejs/plugin-react"
 import tailwindcss from "@tailwindcss/vite"
 
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
-  plugins: [devtools(), tailwindcss(), tanstackStart(), viteReact()],
+  // The prerenderer fetches pages from the preview server. Binding to IPv4
+  // avoids intermittent `::1` connection timeouts that silently drop pages.
+  preview: { host: "127.0.0.1" },
+  plugins: [
+    tailwindcss(),
+    tanstackStart({
+      prerender: {
+        enabled: true,
+        crawlLinks: true,
+        failOnError: true,
+        retryCount: 3,
+        // Index routes are discovered as both `/products` and `/products/`;
+        // keep only the canonical form.
+        filter: ({ path }) => path === "/" || !path.endsWith("/"),
+      },
+      // Index routes are also discovered with a trailing slash; keep them out
+      // of the sitemap so only canonical URLs are listed.
+      pages: [
+        ...["/products/", "/experience/"].map((path) => ({
+          path,
+          sitemap: { exclude: true },
+        })),
+        // Static hosts (Cloudflare Pages, Netlify, Vercel) serve /404.html for
+        // unknown URLs.
+        {
+          path: "/404",
+          prerender: {
+            enabled: true,
+            outputPath: "/404.html",
+            // Hosts serve this file at arbitrary URLs, where the client router
+            // can't reproduce the prerendered markup. Ship it as plain HTML so
+            // there is no hydration mismatch.
+            onSuccess: ({ html }) =>
+              writeFile(
+                fileURLToPath(
+                  new URL("./dist/client/404.html", import.meta.url)
+                ),
+                html
+                  .replace(/<script\b[\s\S]*?<\/script>/g, "")
+                  .replace(/<link rel="modulepreload"[^>]*>/g, "")
+              ),
+          },
+          sitemap: { exclude: true },
+        },
+      ],
+      sitemap: {
+        enabled: true,
+        host: "https://sohel.pro",
+      },
+    }),
+    viteReact(),
+  ],
 })
 
 export default config

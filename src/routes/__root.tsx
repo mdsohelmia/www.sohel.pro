@@ -1,36 +1,39 @@
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
-import { TanStackDevtools } from "@tanstack/react-devtools"
+import { SiteHeader } from "@/components/site/header"
+import { SiteFooter } from "@/components/site/footer"
+import { NotFound } from "@/components/site/not-found"
+import { site } from "@/data/site"
 
 import appCss from "../styles.css?url"
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url"
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      {
-        charSet: "utf-8",
-      },
-      {
-        name: "viewport",
-        content: "width=device-width, initial-scale=1",
-      },
-      {
-        title: "TanStack Start Starter",
-      },
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#fcfcfd" },
+      { name: "color-scheme", content: "light" },
+      { name: "author", content: site.name },
+      { title: `${site.name} — ${site.title}` },
+      { name: "description", content: site.description },
     ],
     links: [
       {
-        rel: "stylesheet",
-        href: appCss,
+        rel: "preload",
+        href: interLatin,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
       },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.ico", sizes: "32x32" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/manifest.json" },
     ],
   }),
-  notFoundComponent: () => (
-    <main className="container mx-auto p-4 pt-16">
-      <h1>404</h1>
-      <p>The requested page could not be found.</p>
-    </main>
-  ),
+  notFoundComponent: NotFound,
   shellComponent: RootDocument,
 })
 
@@ -41,18 +44,19 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
-        <TanStackDevtools
-          config={{
-            position: "bottom-right",
-          }}
-          plugins={[
-            {
-              name: "Tanstack Router",
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
+        <a
+          href="#main"
+          className="fixed top-3 left-3 z-50 -translate-y-16 rounded-md bg-foreground px-3 py-2 text-sm text-background transition-transform duration-200 focus:translate-y-0"
+        >
+          Skip to content
+        </a>
+        <div className="flex min-h-svh flex-col">
+          <SiteHeader />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter />
+        </div>
         <Scripts />
       </body>
     </html>
